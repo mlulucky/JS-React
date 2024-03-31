@@ -15,7 +15,7 @@
 // JSON 반환
 async function getData(){
 	let promiseResponse = await fetch("https://jsonplaceholder.typicode.com/posts");
-	let jsonResponse = await promiseResponse.json();
+	let jsonResponse = await promiseResponse.json(); // fetch 함수가 완료되면 반환되는 promiseResponse 객체에서 JSON 데이터를 추출
 	console.log(jsonResponse);
 }
 
