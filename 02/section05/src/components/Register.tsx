@@ -6,56 +6,52 @@ import { ChangeEvent, useState } from "react";
 // 4. 자기소개
 
 const Register = () => {
-  const [name, setName] = useState("홍길동");
-	const [birth, setBirth] = useState("");
-	const [country, setCountry] = useState("");
-	const [bio, setBio] = useState("");
-	
-  const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
-    // input 태그에서 change 이벤트가 발생했다고 타입 명시
-    // console.log(e); // e.target.value // 입력한 값 - e 이벤트 객체의 target.value 에 값이 있다.
-    setName(e.target.value);
-  };
+  // 여러 상태를 하나의 객체로 관리
+  const [input, setInput] = useState({
+    name: "",
+    birth: "",
+    country: "",
+    bio: "",
+  });
 
-	const onChangeBirth = (e: ChangeEvent<HTMLInputElement>) => {
-		setBirth(e.target.value);
-	}
+	console.log(input);
 
-	const onChangeCountry = (e : ChangeEvent<HTMLSelectElement>) => {
-		setCountry(e.target.value);
-	}
-
-	const onChangeBio = (e: ChangeEvent<HTMLTextAreaElement>) => {
-		setBio(e.target.value);
+	// 통합 이벤트 핸들러
+	const onChange = (e : ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>{
+		setInput({
+			...input, // 기존 상태(객체)를 복사
+			[e.target.name] : e.target.value // [변수명] == key 
+		})
 	}
 
   return (
     <div>
       <div>
         <input
-          value={name}
+					name="name"
+          value={input.name}
           type="text"
-          onChange={onChangeName}
+          onChange={onChange}
           placeholder="이름"
         />
       </div>
       <div>
-        <input value={birth} type="date" onChange={onChangeBirth}/>
-				{birth}
+        <input name="birth" value={input.birth} type="date" onChange={onChange} />
+        {input.birth}
       </div>
-			<div>
-				<select onChange={onChangeCountry}>
-					<option value=""></option>
-					<option value="kr">한국</option>
-					<option value="us">미국</option>
-					<option value="uk">영국</option>
-				</select>
-				{country}
-			</div>
-			<div>
-				<textarea onChange={onChangeBio}/>
-				{bio}
-			</div>
+      <div>
+        <select name="country" onChange={onChange}>
+          <option value=""></option>
+          <option value="kr">한국</option>
+          <option value="us">미국</option>
+          <option value="uk">영국</option>
+        </select>
+        {input.country}
+      </div>
+      <div>
+        <textarea name="bio" onChange={onChange} />
+        {input.bio}
+      </div>
     </div>
   );
 };
