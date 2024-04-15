@@ -15,6 +15,7 @@ module.exports = {
       { allowConstantExport: true },
     ],
 		"no-unused-vars": "off", // 사용안하는 변수 에러사항 옵션끄기
-		"react/prop-types": "off" 
+		"react/prop-types": "off",
+		"@typescript-eslint/no-unused-vars": "off" // TypeScript에서 사용하지 않는 변수 경고 비활성화
   },
 }
