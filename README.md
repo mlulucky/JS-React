@@ -1,1 +1,1 @@
-# JavaScriptStudy2
+# js-react
